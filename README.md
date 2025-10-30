@@ -1,4 +1,4 @@
-# ✨ C++ Programs Repository – Hacktoberfest 2025 ✨
+# ✨ C Programs Repository – Hacktoberfest 2025 ✨
 
 <p align="center">
   <img src="https://img.shields.io/badge/Hacktoberfest-2025-blueviolet?style=for-the-badge&logo=hackclub" />
