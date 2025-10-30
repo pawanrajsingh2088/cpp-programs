@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void findComb(int index,int target , vector<int>& candidates , vector<int>& curr, vector<vector<int>>& result){
+        if(target == 0){
+            result.push_back(curr);
+            return;
+        }
+        //if(target<0) return;
+        for(int i = index; i<candidates.size();i++){
+            if(candidates[i]>target) break;
+            curr.push_back(candidates[i]);
+            findComb(i , target-candidates[i],candidates,curr,result);
+            curr.pop_back();
+        }
+
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> result;
+        vector<int> curr;
+        sort(candidates.begin(),candidates.end());
+        findComb(0,target,candidates,curr,result);
+        return result;
+    }
+};
