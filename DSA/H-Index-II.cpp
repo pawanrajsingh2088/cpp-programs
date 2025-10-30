@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 // Brute force solution
 // h index = v >= n-v
