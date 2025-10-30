@@ -1,73 +1,72 @@
+//Quick Sort Algorithm Implementation in C++
 #include <iostream>
-#include <vector>
-#include <algorithm> // Required for std::swap
-
 using namespace std;
 
-// Function to partition the array (Lomuto scheme)
-// This function places the pivot element at its correct sorted position
-// and puts all elements smaller than the pivot to its left,
-// and all elements greater than the pivot to its right.
-int partition(vector<int>& arr, int low, int high) {
-    // Choose the last element as the pivot
-    int pivot = arr[high]; 
-    
-    // Index of the smaller element
-    int i = (low - 1); 
+//  Swap function — exchanges two elements by reference
+void swap(int &a, int &b) {
+    int temp = a;
+    a = b;
+    b = temp;
+}
 
-    // Iterate through the array from low to high-1
-    for (int j = low; j <= high - 1; j++) {
-        // If current element is smaller than the pivot
-        if (arr[j] < pivot) {
-            i++; // Increment index of smaller element
-            // Swap the current element with the element at i
-            swap(arr[i], arr[j]); 
+//  Partition function — places the pivot element at the correct position
+// and arranges all smaller elements to the left and larger to the right.
+
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];                           //Pivot Element is the last element in the array
+    int i = (low - 1);                               //i tracks the index of smaller element
+
+//Traverse through all elements and compare with pivot.
+    for (int j = low; j < high; j++) {
+      
+       //If current element is smaller or equal to pivot.
+        if (arr[j] <= pivot) {
+            i++;                   //increment index of smaller element
+            swap(arr[i], arr[j]);   //Swap current element with element at i 
         }
     }
-    // Swap the pivot element with the element at (i + 1)
-    swap(arr[i + 1], arr[high]); 
-    
-    // Return the partitioning index
-    return (i + 1); 
+    //Place the pivot element at its correct sorted position
+    swap(arr[i + 1], arr[high]);
+    return (i + 1);
 }
 
-// The main Quicksort function
-void quickSort(vector<int>& arr, int low, int high) {
+//QuickSort function - recursive function that sorts the array.
+void quickSort(int arr[], int low, int high) {
     if (low < high) {
-        // pi is the partitioning index, arr[pi] is now at the right place
-        int pi = partition(arr, low, high);
+        
+        int pi = partition(arr, low, high);      //pi is the partitioning index
 
-        // Recursively sort the elements before partition and after partition
-        quickSort(arr, low, pi - 1);  // Left subarray
-        quickSort(arr, pi + 1, high); // Right subarray
+        //Recursively sort elements before and after partition
+        quickSort(arr, low, pi - 1);          //left side of pivot
+        quickSort(arr, pi + 1, high);         //right side of pivot
     }
 }
 
-// Helper function to print the array
-void printArray(const vector<int>& arr) {
-    for (int x : arr) {
-        cout << x << " ";
-    }
+//Helper function to print the array 
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        cout << arr[i] << " ";
     cout << endl;
 }
 
+//Driver function - Execution starts here.
 int main() {
-   int n;
-    cout << "Enter the number of elements: ";
+    int n;
+    cout << "Enter number of elements: ";
     cin >> n;
 
-    vector<int> data(n);
+    int arr[n];                     //Create array of size n 
     cout << "Enter " << n << " elements: ";
     for (int i = 0; i < n; i++)
-        cin >> data[i];
+        cin >> arr[i];
 
-    cout << "Original array: ";
-    printArray(data);
+    cout << "\nOriginal array: ";
+    printArray(arr, n);
 
-    quickSort(data, 0, n - 1);
+    quickSort(arr, 0, n - 1);       //Perform Quick Sort 
 
     cout << "Sorted array: ";
-    printArray(data);
+    printArray(arr, n);            //Show array after sorting
 
     return 0;
 }
