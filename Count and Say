@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string countAndSay(int n) {
+        if (n==1){
+            return "1";
+        } 
+        string prev = countAndSay(n-1);
+        string result = "";
+        int count = 0;
+        char currentChar = prev[0];
+        for(char c : prev){
+            if(c == currentChar){
+                count++;
+            }else{
+                result+= to_string(count)+currentChar;
+                currentChar = c;
+                count = 1;
+            }
+        }
+        result+= to_string(count)+currentChar;
+        return result;
+    }
+};
